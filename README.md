@@ -1,4 +1,4 @@
-# This is my package lrp
+# This is a basic package for laravel roles and permissions
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/novatopro/lrp.svg?style=flat-square)](https://packagist.org/packages/novatopro/lrp)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/novatopro/lrp/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/novatopro/lrp/actions?query=workflow%3Arun-tests+branch%3Amain)
