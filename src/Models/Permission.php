@@ -6,16 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Role extends Model
+class Permission extends Model
 {
     use HasFactory;
     protected $fillable=[
         'name',
         'slug',
+        'description',
     ];
 
     /**
-     * The users that belong to the Role
+     * The users that belong to the Permission
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
@@ -25,12 +26,12 @@ class Role extends Model
     }
 
     /**
-     * The permissions that belong to the Permission
+     * The roles that belong to the Permission
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function permissions(): BelongsToMany
+    public function roles(): BelongsToMany
     {
-        return $this->belongsToMany(Permission::class);
+        return $this->belongsToMany(Role::class);
     }
 }

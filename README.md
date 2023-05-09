@@ -51,9 +51,79 @@ php artisan vendor:publish --tag="lrp-views"
 
 ## Usage
 
+### Update user model relationship
+
+> app\Models\User.php
+
 ```php
-$lrp = new NovatoPro\Lrp();
-echo $lrp->echoPhrase('Hello, NovatoPro!');
+use NovatoPro\Lrp\Models\Role;
+
+public function roles()
+{
+    return $this->belongsToMany(Role::class)->with('permissions');
+}
+
+public function hasPermissions($permissions)
+{
+    return $this->roles()->whereHas('permissions',fn($p)=>$p->whereIn('slug',$permissions))->count();
+}
+```
+
+### Update boot methop in AuthServiceProvider
+
+> app\Providers\AuthServiceProvider.php
+
+```php
+Gate::define('access', function (User $user, ...$permissions) {
+    return $user->hasPermissions($permissions);
+});
+```
+
+### Examples
+```php
+use NovatoPro\Lrp\Models\Role;
+use NovatoPro\Lrp\Models\Permission;
+// Example user credentials
+$credentials = [
+    'name'=>'Example User',
+    'email'=>'developer.user@example.com',
+    'password'=>'password'
+];
+
+// Create example user
+$user = User::updateOrCreate(['email'=>$credentials['email']],['name'=>$credentials['name'],'password'=>Hash::make($credentials['password'])]);
+
+// Create example role
+$role = Role::updateOrCreate(['name'=>'Developer Features','slug'=>'developer-features']);
+
+// Create example permission
+$permission = Permission::updateOrCreate(['name'=>'Dev','slug'=>'dev','description'=>'Can see features in development']);
+
+// Add permision to role without remove, without duplicate
+$role->permissions()->syncWithoutDetaching($permission->id);
+
+// Add role to user without remove, without duplicate
+$user->roles()->syncWithoutDetaching($role->id);
+
+// Check permissions in controllers
+if($user->can('access', ['developer','dev','develop'])){
+    // Can see features in development
+}else{
+    // Can't see features in development
+}
+
+// Authorize with permissions
+use Illuminate\Support\Facades\Gate;
+Gate::authorize('access','dev');
+```
+
+```php
+// Check permissions in blade
+@can('access', ['developer','dev','develop'])
+    <h1>Can see features in development</h1>
+@else
+    <h1>Can't see features in development</h1>
+@endcan
 ```
 
 ## Testing
