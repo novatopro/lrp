@@ -81,6 +81,8 @@ Gate::define('access', function (User $user, ...$permissions) {
 
 ### Examples
 ```php
+use NovatoPro\Lrp\Models\Role;
+use NovatoPro\Lrp\Models\Permission;
 // Example user credentials
 $credentials = [
     'name'=>'Example User',
@@ -102,6 +104,26 @@ $role->permissions()->syncWithoutDetaching($permission->id);
 
 // Add role to user without remove, without duplicate
 $user->roles()->syncWithoutDetaching($role->id);
+
+// Check permissions in controllers
+if($user->can('access', ['developer','dev','develop'])){
+    // Can see features in development
+}else{
+    // Can't see features in development
+}
+
+// Authorize with permissions
+use Illuminate\Support\Facades\Gate;
+Gate::authorize('access','dev');
+```
+
+```php
+// Check permissions in blade
+@can('access', ['developer','dev','develop'])
+    <h1>Can see features in development</h1>
+@else
+    <h1>Can't see features in development</h1>
+@endcan
 ```
 
 ## Testing
