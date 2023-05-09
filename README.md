@@ -5,15 +5,7 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/novatopro/lrp/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/novatopro/lrp/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/novatopro/lrp.svg?style=flat-square)](https://packagist.org/packages/novatopro/lrp)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
-
-## Support Spatie
-
-[<img src="https://avatars.githubusercontent.com/u/7535935?s=200&v=4" width="200px" />](https://spatie.be/github-ad-click/lrp)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+This package provide basic roles and permissions, this readme.md contains examples of usage.
 
 ## Installation
 
@@ -148,6 +140,14 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 - [NovatoPro](https://github.com/NovatoPro)
 - [All Contributors](../../contributors)
+
+## Support Spatie
+
+[<img src="https://avatars.githubusercontent.com/u/7535935?s=200&v=4" width="200px" />](https://spatie.be/github-ad-click/lrp)
+
+We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
+
+We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
 
 ## License
 
