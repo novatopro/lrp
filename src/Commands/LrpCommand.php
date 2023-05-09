@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace NovatoPro\Lrp\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class LrpCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'lrp';
 
     public $description = 'My command';
 
