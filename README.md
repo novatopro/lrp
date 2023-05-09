@@ -69,7 +69,7 @@ public function hasPermissions($permissions)
 }
 ```
 
-### Update boot methop in AuthServiceProvider
+### Update boot method in AuthServiceProvider
 
 > app\Providers\AuthServiceProvider.php
 
