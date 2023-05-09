@@ -48,17 +48,13 @@ php artisan vendor:publish --tag="lrp-views"
 > app\Models\User.php
 
 ```php
-use NovatoPro\Lrp\Models\Role;
+use NovatoPro\Lrp\Traits\UserLrp;
 
-public function roles()
+class User extends Authenticatable
 {
-    return $this->belongsToMany(Role::class)->with('permissions');
+    use UserLrp;
 }
 
-public function hasPermissions($permissions)
-{
-    return $this->roles()->whereHas('permissions',fn($p)=>$p->whereIn('slug',$permissions))->count();
-}
 ```
 
 ### Update boot method in AuthServiceProvider
