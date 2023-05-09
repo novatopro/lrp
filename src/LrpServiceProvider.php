@@ -19,7 +19,7 @@ class LrpServiceProvider extends PackageServiceProvider
             ->name('lrp')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_lrp_table')
+            ->hasMigrations(array('create_roles_table','create_role_user_table','create_permissions_table','create_permission_role_table'))
             ->hasCommand(LrpCommand::class);
     }
 }
