@@ -39,6 +39,26 @@
             <input type="text" wire:model="role.slug" readonly placeholder="Role slug" class="form-control {{$errors->has('role.slug')?'is-invalid':''}}">
             <button type="button" wire:click="resetInputs" class="btn btn-secondary">Cancel</button>
             <button type="button" wire:click="saverole" class="btn btn-success">Save Role</button>
+            @if ($role->id)
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Asigned permissions</h4>
+                        @forelse ($role->permissions as $item)
+                            <button type="button" class="btn btn-danger" wire:click="removePermissionFromRole({{$item->id}})">{{$item->name}}</button>
+                        @empty
+                            <p>No permissions asigned</p>
+                        @endforelse
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Asign permissions</h4>
+                        @forelse ($permissions->whereNotIn('id',$role->permissions->pluck('id')->toArray()) as $item)
+                            <button type="button" class="btn btn-success" wire:click="addPermissionToRole({{$item->id}})">{{$item->name}}</button>
+                        @empty
+                            <p>No permissions created / No permissions to asign</p>
+                        @endforelse
+                    </div>
+                </div>
+            @endif
         </div>
         <div class="{{ $permission->id ? 'sticky-top' : '' }}">
             <h3>{{ $permissiontitle }}</h3>

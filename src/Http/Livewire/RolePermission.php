@@ -30,7 +30,7 @@ class RolePermission extends Component
     }
     public function render()
     {
-        return view('livewire.role-permission', ['roles' => Role::when($this->search,fn($q)=>$q->where('name','like',"%$this->search%"))->get(), 'permissions' => Permission::when($this->search,fn($q)=>$q->where('name','like',"%$this->search%"))->get()]);
+        return view('lrp::livewire.role-permission', ['roles' => Role::when($this->search,fn($q)=>$q->where('name','like',"%$this->search%"))->get(), 'permissions' => Permission::when($this->search,fn($q)=>$q->where('name','like',"%$this->search%"))->get()]);
     }
     public function resetInputs()
     {
@@ -82,5 +82,15 @@ class RolePermission extends Component
         $this->permission->save();
         session()->flash('message', 'Permission successfully saved.');
         $this->resetInputs();
+    }
+    public function addPermissionToRole(Permission $permission)
+    {
+        $this->role->permissions()->syncWithoutDetaching($permission->id);
+        $this->role->load('permissions');
+    }
+    public function removePermissionFromRole(Permission $permission)
+    {
+        $this->role->permissions()->detach($permission->id);
+        $this->role->load('permissions');
     }
 }
