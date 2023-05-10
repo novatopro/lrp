@@ -2,12 +2,19 @@
 
 namespace NovatoPro\Lrp;
 
+use Livewire\Livewire;
+use NovatoPro\Lrp\Http\Livewire\RolePermission;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use NovatoPro\Lrp\Commands\LrpCommand;
 
 class LrpServiceProvider extends PackageServiceProvider
 {
+
+    public function bootingPackage()
+    {
+        Livewire::component('role-permission', RolePermission::class);
+    }
+    
     public function configurePackage(Package $package): void
     {
         /*
@@ -19,7 +26,12 @@ class LrpServiceProvider extends PackageServiceProvider
             ->name('lrp')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigrations(array('create_roles_table','create_role_user_table','create_permissions_table','create_permission_role_table'))
-            ->hasCommand(LrpCommand::class);
+            ->hasRoutes('web')
+            ->hasMigrations(array('create_roles_table', 'create_role_user_table', 'create_permissions_table', 'create_permission_role_table'))
+            // ->hasCommand(LrpCommand::class)
+            ;
     }
+
+    
+    
 }
